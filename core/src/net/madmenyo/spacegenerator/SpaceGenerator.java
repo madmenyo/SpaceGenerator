@@ -21,10 +21,10 @@ public class SpaceGenerator extends Game
 		Star sun = new Star("Sol", 0, 0, 1);
 		Planet earth = new Planet("Earth", 149600000L, (float)Math.toRadians(90), "Terrestrial", 1f);
 
-		float orbitalPeriodInSeconds = SpaceMath.CalculateOrbitalPeriod(sun.getMassInKilogram(), earth.getOrbitRadius() * 1000);
-		float orbitalPeriodInDays = orbitalPeriodInSeconds / 60 / 60 / 24;
+		//float orbitalPeriodInSeconds = SpaceMath.CalculateOrbitalPeriodInSeconds(sun.getMassInKilogram(), earth.getOrbitRadius() * 1000);
+		//float orbitalPeriodInDays = orbitalPeriodInSeconds / 60 / 60 / 24;
 
-		System.out.println(orbitalPeriodInDays);
+		System.out.println(SpaceMath.CalculateOrbitalPeriodInYears(sun.getMassInKilogram(), earth.getOrbitRadius() * 1000));
 	}
 
 	/**

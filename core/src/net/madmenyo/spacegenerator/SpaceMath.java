@@ -19,12 +19,32 @@ public class SpaceMath {
     }
 
     /**
-     * Calculates
+     * Calculates orbital period
      * @param parentMass Mass of parent body in kg
      * @param orbitalRadius Radius from parent body in m
-     * @return
+     * @return Orbital period in seconds
      */
-    public static float CalculateOrbitalPeriod(float parentMass, float orbitalRadius){
+    public static float CalculateOrbitalPeriodInSeconds(float parentMass, float orbitalRadius){
         return (float)(2 * Math.PI * Math.sqrt(Math.pow(orbitalRadius, 3) / (G * parentMass)));
+    }
+
+    /**
+     * Calculates orbital period
+     * @param parentMass Mass of parent body in kg
+     * @param orbitalRadius Radius from parent body in m
+     * @return orbital period in days
+     */
+    public static float CalculateOrbitalPeriodInDays(float parentMass, float orbitalRadius){
+        return CalculateOrbitalPeriodInSeconds(parentMass, orbitalRadius) / 86400;
+    }
+
+    /**
+     * Calculates orbital period
+     * @param parentMass Mass of parent body in kg
+     * @param orbitalRadius Radius from parent body in m
+     * @return orbital period in days
+     */
+    public static float CalculateOrbitalPeriodInYears(float parentMass, float orbitalRadius){
+        return CalculateOrbitalPeriodInSeconds(parentMass, orbitalRadius) / 31556926f;
     }
 }
