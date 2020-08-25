@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import javafx.stage.Stage;
+
 /**
  * SpaceGenerator [2020]
  * By Menno Gouw

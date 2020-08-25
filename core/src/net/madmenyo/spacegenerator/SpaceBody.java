@@ -20,6 +20,11 @@ public abstract class SpaceBody
 		return name;
 	}
 
+	protected String bodyType;
+	public String getBodyType() {
+		return bodyType;
+	}
+
 	/**
 	 * Orbit radius in km
 	 */
