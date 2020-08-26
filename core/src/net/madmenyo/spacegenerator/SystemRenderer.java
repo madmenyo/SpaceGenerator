@@ -48,7 +48,13 @@ public class SystemRenderer implements ISystemRenderer {
         mapScreenDistances(systemRoot);
     }
 
+	/**
+	 * Maps distances for all satelites of given central body
+	 * @param centerBody the parent body of the child bodies being mapped.
+	 */
 	private void mapScreenDistances(SpaceBody centerBody){
+		// Keep redundant log factor for now in order to make quick adjustments
+		// At the moment just using closest body for division in the logFunction for each distance
         float closestBody = getClosestOrbitingBodyDistance(centerBody);
         float logFactor = closestBody;
 
@@ -58,7 +64,6 @@ public class SystemRenderer implements ISystemRenderer {
         float screenFactor = bodyRange / farthestLogNumber;
 		System.out.println(screenFactor);
 
-        List<Double> logDistances = new ArrayList<>();
         for (SpaceBody body : centerBody.getChildren()){
             // map from 1 to 1+ with log function
             float logDistance = (float)logNumber(body.getOrbitRadius() / logFactor, 2);
@@ -66,8 +71,6 @@ public class SystemRenderer implements ISystemRenderer {
             float screenRadius = (logDistance * screenFactor) + closestBodyDistance;
 			System.out.println(body.getName() + " : " + screenRadius);
             virtualDistanceMap.put(body, screenRadius);
-
-
         }
     }
 
