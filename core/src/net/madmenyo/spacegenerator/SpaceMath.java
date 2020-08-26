@@ -1,6 +1,7 @@
 package net.madmenyo.spacegenerator;
 
 import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class SpaceMath {
 
@@ -50,6 +51,16 @@ public class SpaceMath {
     public static float CalculateOrbitalPeriodInYears(float parentMass, float orbitalRadius){
         return CalculateOrbitalPeriodInSeconds(parentMass, orbitalRadius) / 31556926f;
     }
+
+	/**
+	 * Converts polar coordinates (distance, rotation) to cartesian (x, y)
+	 * @param distance distance from origin
+	 * @param rotation rotation from origin
+	 * @return cartesian coordinates in Vector2
+	 */
+	public static Vector2 ToCarthesian(double distance, double rotation){
+		return new Vector2((float)(distance * Math.sin(rotation)), (float)(distance * Math.cos(rotation)));
+	}
 
 
     public static float ConvertAuToKm(float au){

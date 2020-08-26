@@ -10,8 +10,8 @@ public class BodyActor extends Button {
     private SpaceBody body;
     private Label textLabel;
 
-    public BodyActor(Skin skin, String styleName, SpaceBody body) {
-        super(skin, styleName);
+    public BodyActor(Skin skin, SpaceBody body) {
+        super(skin);
         this.body = body;
 
         textLabel = new Label(body.getName(), skin);

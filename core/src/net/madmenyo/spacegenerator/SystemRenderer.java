@@ -1,7 +1,11 @@
 package net.madmenyo.spacegenerator;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -17,7 +21,9 @@ public class SystemRenderer implements ISystemRenderer {
     private SpaceBody systemRoot;
 
     private Viewport viewport;
+
     private Stage stage;
+    private Skin skin;
 
     private float farthestBodyDistance = 400;
     private float closestBodyDistance = 24;
@@ -29,9 +35,13 @@ public class SystemRenderer implements ISystemRenderer {
     public SystemRenderer(SpaceBody systemRoot) {
         this.systemRoot = systemRoot;
 
-        viewport = new ExtendViewport(farthestBodyDistance, farthestBodyDistance);
-        stage = new Stage(viewport);
+        viewport = new ExtendViewport(farthestBodyDistance * 2, farthestBodyDistance * 2);
 
+        stage = new Stage(viewport);
+        skin = new Skin(Gdx.files.internal("gui/uiskin.json"), new TextureAtlas("gui/uiskin.atlas"));
+
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setAutoShapeType(true);
 
         //logNumber(0.16, 4);
         //logNumber(16, 4);
@@ -46,7 +56,25 @@ public class SystemRenderer implements ISystemRenderer {
         System.out.println("Test far : " + logNumber(16f / .16f, 2));
 
         mapScreenDistances(systemRoot);
+
+        createActors();
     }
+
+	private void createActors()
+	{
+		// create sun at center
+
+
+		// place each body using the virtual distance map
+		BodyActor bodyActor;
+		for (Map.Entry<SpaceBody, Float> entry : virtualDistanceMap.entrySet()){
+			bodyActor = new BodyActor(skin, entry.getKey());
+			Vector2 center = SpaceMath.ToCarthesian(entry.getValue(), 0);
+			center.add(farthestBodyDistance, farthestBodyDistance);
+			bodyActor.setBounds(center.x - bodySymbolRadius, center.y - bodySymbolRadius, bodySymbolRadius * 2, bodySymbolRadius * 2);
+			stage.addActor(bodyActor);
+		}
+	}
 
 	/**
 	 * Maps distances for all satelites of given central body
@@ -107,12 +135,24 @@ public class SystemRenderer implements ISystemRenderer {
 
     @Override
     public void draw() {
+		stage.act();
+
+		//Draw orbit lines
+		shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		for (Float f : virtualDistanceMap.values()){
+			shapeRenderer.circle(farthestBodyDistance, farthestBodyDistance, f);
+		}
+		shapeRenderer.end();
+
+		stage.draw();
+
 
     }
 
     @Override
     public void resize(int width, int height) {
-
+		viewport.update(width, height, true);
 
     }
 
