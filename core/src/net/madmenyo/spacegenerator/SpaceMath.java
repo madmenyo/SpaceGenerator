@@ -1,11 +1,14 @@
 package net.madmenyo.spacegenerator;
 
+import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
+
 public class SpaceMath {
 
     /**
      * Gravitational constant in m3/(kg·s2)
      */
     public static double G = (float)6.67384e-11;
+    public static double AU = 149597871;
 
 
     /**
@@ -46,5 +49,14 @@ public class SpaceMath {
      */
     public static float CalculateOrbitalPeriodInYears(float parentMass, float orbitalRadius){
         return CalculateOrbitalPeriodInSeconds(parentMass, orbitalRadius) / 31556926f;
+    }
+
+
+    public static float ConvertAuToKm(float au){
+        return (float)(au * AU);
+    }
+
+    public static float ConvertKmToAu(float km){
+        return (float)(km / AU);
     }
 }

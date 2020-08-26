@@ -15,7 +15,9 @@ public class BodyActor extends Button {
         this.body = body;
 
         textLabel = new Label(body.getName(), skin);
-        Stage s;
+
+        setDebug(true);
+
     }
 
     @Override

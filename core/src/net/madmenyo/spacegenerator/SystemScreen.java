@@ -20,7 +20,7 @@ public class SystemScreen extends ScreenAdapter
 	{
 		this.systemRoot = systemRoot;
 
-		systemRenderer = new TestRenderer(systemRoot);
+		systemRenderer = new SystemRenderer(systemRoot);
 	}
 
 	@Override
