@@ -20,25 +20,20 @@ public class Planet extends SpaceBody
 	/**
 	 * Mass in earths
 	 */
-	private float mass;
+	private float massInEarths;
 
-	public Planet(String name, long orbitRadius, float rotation)
-	{
-		super(name, orbitRadius, rotation);
-	}
-
-	public Planet(String name, long orbitRadius, float rotation, String type, float mass) {
+	public Planet(String name, long orbitRadius, float rotation, String type, float massInEarths) {
 		super(name, orbitRadius, rotation);
 		this.type = type;
-		this.mass = mass;
+		this.massInEarths = massInEarths;
 	}
 
 	public double getMassInKilogram(){
-		return mass * EARTH_MASS_KG;
+		return massInEarths * EARTH_MASS_KG;
 	}
 
 	@Override
-	public Double getMassInKg() {
-		return mass * EARTH_MASS_KG;
+	public double getMassInKg() {
+		return massInEarths * EARTH_MASS_KG;
 	}
 }

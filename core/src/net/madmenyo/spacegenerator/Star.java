@@ -27,30 +27,24 @@ public class Star extends SpaceBody
 	/**
 	 * Mass in suns
 	 */
-	private float mass;
+	private float solarMass;
 
 	/**
 	 * Luminosity in suns
 	 */
 	private float lumonosity;
 
-
-	public Star(String name, long orbitRadius, float rotation)
-	{
+	public Star(String name, long orbitRadius, float rotation, float solarMass) {
 		super(name, orbitRadius, rotation);
-	}
-
-	public Star(String name, long orbitRadius, float rotation, float mass) {
-		super(name, orbitRadius, rotation);
-		this.mass = mass;
+		this.solarMass = solarMass;
 	}
 
 	public float getMassInKilogram(){
-		return (float)(mass * SOLAR_MASS_KG);
+		return (float)(solarMass * SOLAR_MASS_KG);
 	}
 
 	@Override
-	public Double getMassInKg() {
-		return mass * SOLAR_MASS_KG;
+	public double getMassInKg() {
+		return solarMass * SOLAR_MASS_KG;
 	}
 }

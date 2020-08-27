@@ -85,8 +85,18 @@ public abstract class SpaceBody
 
 	public void update(float delta) {
 		if (parent == null) return;
-		float period = SpaceMath.CalculateOrbitalPeriodInSeconds(parent.)
+		float periodInSeconds = SpaceMath.CalculateOrbitalPeriodInSeconds((float)parent.getMassInKg(), orbitRadius * 1000);
+		//float dayMultiplier = delta * 60 * 60 * 24;
+		float timePassPerFrame = 1 * 60 * 60 * 24;
+
+		//float rotationInDegrees = 360 * (dayMultiplier / periodInSeconds);
+		float rotationInDegrees = 360 * (timePassPerFrame / periodInSeconds);
+		//System.out.println(periodInSeconds);
+
+		//System.out.println(rotationInDegrees);
+		rotation += Math.toRadians(rotationInDegrees);
+
 	}
 
-	public abstract Double getMassInKg();
+	public abstract double getMassInKg();
 }
