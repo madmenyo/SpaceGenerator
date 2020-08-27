@@ -16,6 +16,7 @@ public class BodyActor extends Button {
     private float positionOffset;
 
 
+
     public BodyActor(Skin skin, SpaceBody body, float virtualScreenDistance, float positionOffset) {
         super(skin);
         this.body = body;
@@ -31,6 +32,8 @@ public class BodyActor extends Button {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        body.update(delta);
 
         Vector2 position = SpaceMath.ToCarthesian(virtualScreenDistance, body.getRotation());
         setPosition(position.x + positionOffset, position.y + positionOffset, Align.center);

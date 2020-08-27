@@ -37,5 +37,8 @@ public class Planet extends SpaceBody
 		return mass * EARTH_MASS_KG;
 	}
 
-
+	@Override
+	public Double getMassInKg() {
+		return mass * EARTH_MASS_KG;
+	}
 }

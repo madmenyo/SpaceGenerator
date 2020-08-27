@@ -48,4 +48,9 @@ public class Star extends SpaceBody
 	public float getMassInKilogram(){
 		return (float)(mass * SOLAR_MASS_KG);
 	}
+
+	@Override
+	public Double getMassInKg() {
+		return mass * SOLAR_MASS_KG;
+	}
 }

@@ -82,4 +82,11 @@ public abstract class SpaceBody
 		body.parent = this;
 		children.add(body);
 	}
+
+	public void update(float delta) {
+		if (parent == null) return;
+		float period = SpaceMath.CalculateOrbitalPeriodInSeconds(parent.)
+	}
+
+	public abstract Double getMassInKg();
 }
