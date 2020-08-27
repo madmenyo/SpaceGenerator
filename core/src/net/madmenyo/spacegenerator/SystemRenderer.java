@@ -9,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SystemRenderer implements ISystemRenderer {
@@ -68,7 +66,7 @@ public class SystemRenderer implements ISystemRenderer {
 		// place each body using the virtual distance map
 		BodyActor bodyActor;
 		for (Map.Entry<SpaceBody, Float> entry : virtualDistanceMap.entrySet()){
-			bodyActor = new BodyActor(skin, entry.getKey());
+			bodyActor = new BodyActor(skin, entry.getKey(), entry.getValue(), farthestBodyDistance);
 			Vector2 center = SpaceMath.ToCarthesian(entry.getValue(), 0);
 			center.add(farthestBodyDistance, farthestBodyDistance);
 			bodyActor.setBounds(center.x - bodySymbolRadius, center.y - bodySymbolRadius, bodySymbolRadius * 2, bodySymbolRadius * 2);
