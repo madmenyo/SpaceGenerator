@@ -17,25 +17,57 @@ public class Star extends SpaceBody
 	public static float SOLAR_LUMINOSITY_W = (float)3.828e26;
 
 	public enum Type{
-		O(0.00003f, 30000, 50000, new Color(.1f, .35f, .95f, 1)),
-		B(0.125f, 10000, 30000, new Color(.2f, .45f, .95f, 1)),
-		A(0.6f, 7500, 10000, new Color(.3f, .6f, .9f, 1)),
-		F(3f, 6000, 7500, new Color(.55f, .8f, .8f, 1)),
-		G(7.6f, 5200, 6000, new Color(.9f, .9f, .8f, 1)),
-		K(12.1f, 3700, 5200, new Color(.95f, .7f, .4f, 1)),
-		M(76.45f, 2400, 3700, new Color(.95f, .5f, .2f, 1));
+		O(0.00003f, new Color(.1f, .35f, .95f, 1),
+				30000, 50000,
+				16, 20,
+				6.6f,10f),
+		B(0.125f, new Color(.2f, .45f, .95f, 1),
+				10000, 30000,
+				2.1f, 16,
+				1.8f,6.6f),
+		A(0.6f, new Color(.3f, .6f, .9f, 1),
+				7500, 10000,
+				1.4f, 2.1f,
+				1.4f,1.8f),
+		F(3f, new Color(.55f, .8f, .8f, 1),
+				6000, 7500,
+				1.04f, 1.4f,
+				1.15f,1.8f),
+		G(7.6f, new Color(.9f, .9f, .8f, 1),
+				5200, 6000,
+				0.8f, 1.04f,
+				0.96f,1.15f),
+		K(12.1f, new Color(.95f, .7f, .4f, 1),
+				3700, 5200,
+				0.45f, 0.8f,
+				0.7f,0.96f),
+		M(76.45f, new Color(.95f, .5f, .2f, 1),
+				2400, 3700,
+				0.08f,0.45f,
+				0.7f,0.45f
+				);
 
-		float occurancyPercentage;
-		float minTemperature;
-		float maxTemperature;
+		final float occurancyPercentage;
+		final float minTemperature;
+		final float maxTemperature;
+		final float minMass;
+		final float maxMass;
+		final float minRadius;
+		final float maxRadius;
 		Color color;
 
-		Type(float occurancyPercentage, float minTemperature,
-			 float maxTemperature, Color color) {
+		Type(float occurancyPercentage, Color color,
+			 float minTemperature, float maxTemperature,
+			 float minMass, float maxMass,
+			 float minRadius, float maxRadius) {
 			this.occurancyPercentage = occurancyPercentage;
+			this.color = color;
 			this.minTemperature = minTemperature;
 			this.maxTemperature = maxTemperature;
-			this.color = color;
+			this.minMass = minMass;
+			this.maxMass = maxMass;
+			this.minRadius = minRadius;
+			this.maxRadius = maxRadius;
 		}
 
 		public String getType(int temperature){
@@ -50,11 +82,10 @@ public class Star extends SpaceBody
 			int classification = (int)lerp * 10;
 
 			return name() + classification;
-
 		}
 	}
 
-	private String spectralType;
+	private Type type;
 
 	/**
 	 * Temperature in Kelvin
