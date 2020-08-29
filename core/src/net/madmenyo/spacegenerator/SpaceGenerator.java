@@ -9,6 +9,8 @@ public class SpaceGenerator extends Game
 	public void create () {
 		testOrbitalEquations();
 
+		new BasicSystemGenerator();
+
 		// Create solar system by hand and load system screen with it
 		Star star = createSolarSystem();
 		setScreen(new SystemScreen(star));
