@@ -2,9 +2,9 @@ package net.madmenyo.spacegenerator;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class BasicSystemGenerator implements ISystemGenerator {
 
@@ -20,7 +20,7 @@ public class BasicSystemGenerator implements ISystemGenerator {
     public BasicSystemGenerator(long seed) {
         setSeed(seed);
 
-        generateStar();
+        gamifyProbability();
     }
 
     public void setSeed(long seed){
@@ -42,11 +42,11 @@ public class BasicSystemGenerator implements ISystemGenerator {
         // Get probabilities
 		float nr = MathUtils.random.nextFloat() * 100;
 
-		Star.Type[] typesByPercentage = Star.Type.values();
-		Arrays.sort(typesByPercentage, new Comparator<Star.Type>()
+		Star.TypeRealism[] typesByPercentage = Star.TypeRealism.values();
+		Arrays.sort(typesByPercentage, new Comparator<Star.TypeRealism>()
 		{
 			@Override
-			public int compare(Star.Type o1, Star.Type o2)
+			public int compare(Star.TypeRealism o1, Star.TypeRealism o2)
 			{
 				if (o1.occurancyPercentage < o2.occurancyPercentage) return -1;
 				else if (o2.occurancyPercentage < o1.occurancyPercentage) return 1;
@@ -56,7 +56,7 @@ public class BasicSystemGenerator implements ISystemGenerator {
 
 		for (int i = 0; i < 100; i++){
 			float total = 0;
-			for (Star.Type t : typesByPercentage){
+			for (Star.TypeRealism t : typesByPercentage){
 				total += t.occurancyPercentage;
 				if (nr <= total){
 					System.out.println("Generate: " + t.name() + " star.");
@@ -64,8 +64,46 @@ public class BasicSystemGenerator implements ISystemGenerator {
 				// else there should be about 1.25 percentage left generate M star
 			}
 		}
-
     }
+
+    private List<Star.TypeRealism> gamifyProbability(){
+		float oldMin = 0.00006f;
+		float oldMax = 75;
+
+		float newMin = 5;
+		float newMax = 100;
+
+		float oldRange = oldMax - oldMin;
+		float newRange = newMax - newMin;
+
+		float oldValue = oldMin;
+		float newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin;
+
+		System.out.println(newValue);
+
+		oldValue = .6f;
+		newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin;
+		System.out.println(newValue);
+
+		return null;
+
+	}
+
+	/**
+	 * Changes a number in a old range to the value of the given new range
+	 * @param oldMin old min range
+	 * @param oldMax old max range
+	 * @param newMin new min range
+	 * @param newMax new max range
+	 * @param oldValue the value to change
+	 * @return the number in positioned relatively in the new range
+	 */
+	private float changeNumberRange(float oldMin, float oldMax, float newMin, float newMax, float oldValue){
+		float oldRange = oldMax - oldMin;
+		float newRange = newMax - newMin;
+		return  (((oldValue - oldMin) * newRange) / oldRange) + newMin;
+
+	}
 
     @Override
     public SpaceBody getLastGeneratedSystem() {

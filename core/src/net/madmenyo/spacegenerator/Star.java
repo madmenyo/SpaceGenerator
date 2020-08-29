@@ -16,7 +16,8 @@ public class Star extends SpaceBody
 	public static float SOLAR_RADIUS_KM = 696340;
 	public static float SOLAR_LUMINOSITY_W = (float)3.828e26;
 
-	public enum Type{
+	public enum TypeRealism
+	{
 		O(0.00003f, new Color(.1f, .35f, .95f, 1),
 				30000, 50000,
 				16, 20,
@@ -54,12 +55,12 @@ public class Star extends SpaceBody
 		final float maxMass;
 		final float minRadius;
 		final float maxRadius;
-		Color color;
+		final Color color;
 
-		Type(float occurancyPercentage, Color color,
-			 float minTemperature, float maxTemperature,
-			 float minMass, float maxMass,
-			 float minRadius, float maxRadius) {
+		TypeRealism(float occurancyPercentage, Color color,
+					float minTemperature, float maxTemperature,
+					float minMass, float maxMass,
+					float minRadius, float maxRadius) {
 			this.occurancyPercentage = occurancyPercentage;
 			this.color = color;
 			this.minTemperature = minTemperature;
@@ -85,7 +86,7 @@ public class Star extends SpaceBody
 		}
 	}
 
-	private Type type;
+	private TypeRealism typeRealism;
 
 	/**
 	 * Temperature in Kelvin
