@@ -66,7 +66,12 @@ public class BasicSystemGenerator implements ISystemGenerator {
 		}
     }
 
-    private List<Star.TypeRealism> gamifyProbability(){
+	/**
+	 * Returns a list with star probabilities that are more game viable. Realistic probability of a
+	 * O type star is 1 : 3.300.000
+	 * @return
+	 */
+	private List<Star.TypeRealism> gamifyProbability(){
 		float oldMin = 0.00006f;
 		float oldMax = 75;
 
